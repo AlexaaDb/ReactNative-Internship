@@ -1,23 +1,57 @@
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
+import React, { Component } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { connect } from "react-redux";
+import { StyleSheet, Text, View } from "react-native";
+import SideDrawerCustom from "./utils/customDrawer";
+import { Colors } from "./utils/tools";
 
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+const Drawer = createDrawerNavigator();
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import { Stack, HomeStack, VideosStack } from "./routes/stacks";
+import AuthScreen from "./components/auth";
+import ProfileScreen from "./components/user/profile/profile";
+
+const MainDrawer = () => (
+  <Drawer.Navigator
+    drawerContent={(props) => <SideDrawerCustom {...props} />}
+    screenOptions={{
+      drawerStyle: {
+        backgroundColor: Colors.black1,
+      },
+    }}
+  >
+    <Drawer.Screen name="Home" component={HomeStack} />
+    <Drawer.Screen name="Videos" component={VideosStack} />
+    <Drawer.Screen name="Profile" component={ProfileScreen} />
+  </Drawer.Navigator>
+);
+
+class App extends Component {
+  render() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          {this.props.auth.isAuth ? (
+            //we show the whole app
+            <>
+              <Stack.Screen
+                name="Main"
+                component={MainDrawer}
+                options={{ headerShown: false }}
+              />
+            </>
+          ) : (
+            //we show the login
+            <Stack.Screen name="AuthScreen" component={AuthScreen} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const mapStateToProps = (state) => ({ auth: state.auth });
+export default connect(mapStateToProps)(App);
