@@ -1,7 +1,6 @@
 package com.redwire;
-
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Build;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
