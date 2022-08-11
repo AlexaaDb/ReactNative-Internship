@@ -18,6 +18,7 @@ const MainDrawer = () => (
   <Drawer.Navigator
     drawerContent={(props) => <SideDrawerCustom {...props} />}
     screenOptions={{
+      headerShown: false,
       drawerStyle: {
         backgroundColor: Colors.black1,
       },
@@ -33,16 +34,14 @@ class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator headerMode="none">
           {this.props.auth.isAuth ? (
             //we show the whole app
-            <>
-              <Stack.Screen
-                name="Main"
-                component={MainDrawer}
-                options={{ headerShown: false }}
-              />
-            </>
+            <Stack.Screen
+              name="Main"
+              component={MainDrawer}
+              options={{ headerShown: false }}
+            />
           ) : (
             //we show the login
             <Stack.Screen name="AuthScreen" component={AuthScreen} />
