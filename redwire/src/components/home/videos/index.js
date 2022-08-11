@@ -1,16 +1,25 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
+import { Tile } from "react-native-elements";
 
-const VideoScreen = ({ navigation }) => {
+const VideosScreen = ({ navigation }) => {
+  const renderVideos = () => <Tile />;
+
   return (
-    <View>
+    <ScrollView>
       <Text>Videos</Text>
       <Button
         title="see video"
         onPress={() => navigation.navigate("Video_screen")}
       />
-    </View>
+    </ScrollView>
   );
 };
 
-export default VideoScreen;
+export default VideosScreen;
