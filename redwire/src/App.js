@@ -10,9 +10,10 @@ import { Colors } from "./utils/tools";
 
 const Drawer = createDrawerNavigator();
 
-import { Stack, HomeStack, VideosStack } from "./routes/stacks";
+import { Stack, HomeStack, VideosStack, ScreenOptions } from "./routes/stacks";
 import AuthScreen from "./components/auth";
 import ProfileScreen from "./components/user/profile/profile";
+import VideoScreen from "./components/home/videos/video";
 
 const MainDrawer = () => (
   <Drawer.Navigator
@@ -37,11 +38,18 @@ class App extends Component {
         <Stack.Navigator headerMode="none">
           {this.props.auth.isAuth ? (
             //we show the whole app
-            <Stack.Screen
-              name="Main"
-              component={MainDrawer}
-              options={{ headerShown: false }}
-            />
+            <>
+              <Stack.Screen
+                name="Main"
+                component={MainDrawer}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="VideoScreen"
+                component={VideoScreen}
+                options={{ ...ScreenOptions, headerBackTitleVisible: false }}
+              />
+            </>
           ) : (
             //we show the login
             <Stack.Screen name="AuthScreen" component={AuthScreen} />
