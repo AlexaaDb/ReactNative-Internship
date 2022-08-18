@@ -4,9 +4,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { connect } from "react-redux";
+import { autoSignIn } from "./store/actions";
 import { StyleSheet, Text, View } from "react-native";
 import SideDrawerCustom from "./utils/customDrawer";
 import { Colors } from "./utils/tools";
+//import { firebase, usersCollection, auth } from "../../firebase";
 
 const Drawer = createDrawerNavigator();
 
@@ -14,6 +16,7 @@ import { Stack, HomeStack, VideosStack, ScreenOptions } from "./routes/stacks";
 import AuthScreen from "./components/auth";
 import ProfileScreen from "./components/user/profile/profile";
 import VideoScreen from "./components/home/videos/video";
+import Splash from "./components/auth/splash";
 
 const MainDrawer = () => (
   <Drawer.Navigator
@@ -32,12 +35,23 @@ const MainDrawer = () => (
 );
 
 class App extends Component {
+  state = {
+    loading: true,
+  };
+
+  componentDidMount() {
+    this.props.dispatch(autoSignIn()).then(() => {
+      this.setState({ loading: false });
+    });
+  }
+
   render() {
     return (
       <NavigationContainer>
         <Stack.Navigator headerMode="none">
           {this.props.auth.isAuth ? (
             //we show the whole app
+
             <>
               <Stack.Screen
                 name="Main"
@@ -50,9 +64,19 @@ class App extends Component {
                 options={{ ...ScreenOptions, headerBackTitleVisible: false }}
               />
             </>
+          ) : //we show the login
+          this.state.loading ? (
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Splash"
+              component={Splash}
+            />
           ) : (
-            //we show the login
-            <Stack.Screen name="AuthScreen" component={AuthScreen} />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="AuthScreen"
+              component={AuthScreen}
+            />
           )}
         </Stack.Navigator>
       </NavigationContainer>

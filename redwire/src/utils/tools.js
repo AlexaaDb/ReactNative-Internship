@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
-
+import Toast from "react-native-toast-message";
 export const Colors = {
   white: "#ffffff",
   black1: "#131418",
@@ -22,3 +22,32 @@ export const LogoText = (props) => (
     {"RedWire"}
   </Text>
 );
+
+export const showToast = (type, text1, text2) => {
+  switch (type) {
+    case "success":
+      Toast.show({
+        type: "success",
+        text1,
+        text2,
+        position: "bottom",
+        visibilityTime: 4000,
+        autoHide: true,
+        bottomOffset: 40,
+      });
+      break;
+    case "error":
+      Toast.show({
+        type: "error",
+        text1,
+        text2,
+        position: "bottom",
+        visibilityTime: 4000,
+        autoHide: true,
+        bottomOffset: 40,
+      });
+      break;
+    default:
+      null;
+  }
+};
