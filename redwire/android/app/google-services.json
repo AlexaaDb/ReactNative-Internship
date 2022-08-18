@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "28864978879",
+    "project_id": "redwire-ad",
+    "storage_bucket": "redwire-ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28864978879:android:8c3fb1899ecdf2b1a1cb0a",
+        "android_client_info": {
+          "package_name": "com.redwire"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28864978879-hf1sg4n9pka9o450p7842qemjaq6ld3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkg0zXEWsIAU8z8tEIpYrZyQSlFFipqu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28864978879-hf1sg4n9pka9o450p7842qemjaq6ld3k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "28864978879-h03ec2adkqml94v5v7dlvgbda4tjfc0k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.name.redwire"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
